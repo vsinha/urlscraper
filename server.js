@@ -47,7 +47,6 @@ function processAllFieldsOfTheForm(req, res) {
 
         if (urlstring) {
           console.log(links[i].title + ' - ' + links[i].link) // link.href is an alias for link.link
-          console.log(links[i].description + "\n")
           console.log(urlstring);
           res.write(urlstring);
           res.write('\n');
@@ -57,9 +56,10 @@ function processAllFieldsOfTheForm(req, res) {
 
       if (nextCounter < 10) {
         if (next) next()
+      } else {
+        res.end();
       }
 
-      res.end();
     });
   });
 }
