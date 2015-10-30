@@ -17,7 +17,12 @@ var server = http.createServer(function (req, res) {
 
 function displayForm(res) {
   fs.readFile('form.html', function (err, data) {
-    console.error(err);
+    res.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Content-Length': data.length
+    });
+    res.write(data);
+    res.end();
   });
 }
 
@@ -26,11 +31,8 @@ function processAllFieldsOfTheForm(req, res) {
 
   form.parse(req, function (err, fields, files) {
 
-    google(fields['query'], function(err, next, links) {
-      if (err) { 
-        res.write(err);
-        res.end();
-      }
+    google(fields['query'], function(error, next, links) {
+      if (error) console.error(error)
 
 
       //Store the data from the fields in your data store.
