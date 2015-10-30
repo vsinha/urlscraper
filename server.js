@@ -1,7 +1,6 @@
 var http = require('http');
 var fs = require('fs');
 var formidable = require('formidable');
-var util = require('util');
 var google = require('google');
 
 google.resultsPerPage = 10
