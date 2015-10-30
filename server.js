@@ -62,5 +62,7 @@ function processAllFieldsOfTheForm(req, res) {
   });
 }
 
-server.listen(1185);
-console.log("server listening on 1185");
+var port = process.env.PORT || 1185;
+
+server.listen(port);
+console.log("server listening on " + port);
