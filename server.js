@@ -35,6 +35,7 @@ function processAllFieldsOfTheForm(req, res) {
     console.log("received form query: " + fields['query']);
 
     google(fields['query'], function(error, next, links) {
+      console.log('google response');
     
       if (error) console.error(error)
       
@@ -46,17 +47,24 @@ function processAllFieldsOfTheForm(req, res) {
         var urlstring = links[i].link;
 
         if (urlstring) {
-          console.log(links[i].title + ' - ' + links[i].link) // link.href is an alias for link.link
           console.log(urlstring);
-          res.write(urlstring);
-          res.write('\n');
+
+          if (nextCounter <= 10) {
+            res.write(urlstring);
+            res.write('\n');
+          } 
+
           nextCounter += 1;
+          console.log ("counter = " + nextCounter);
         }
+
       }
 
       if (nextCounter < 10) {
+        console.log("calling next");
         if (next) next()
       } else {
+        console.log('ending response');
         res.end();
       }
 
