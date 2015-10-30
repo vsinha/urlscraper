@@ -29,11 +29,15 @@ function displayForm(res) {
 function processAllFieldsOfTheForm(req, res) {
   var form = new formidable.IncomingForm();
 
+  console.log('processing form');
+
   form.parse(req, function (err, fields, files) {
 
-    google(fields['query'], function(error, next, links) {
-      if (error) console.error(error)
+    console.log("received form query: " + fields['query']);
 
+    google(fields['query'], function(error, next, links) {
+    
+      if (error) console.error(error)
 
       //Store the data from the fields in your data store.
       //The data store could be a file or database or any other store based
